@@ -1,7 +1,7 @@
 <?php
 
-require_once './mcstat.php';
-require_once './mcformat.php';
+require_once 'MinecraftStatus.class.php';
+require_once 'MinecraftFormat.class.php';
 
 $hostname = NULL;
 if (array_key_exists('server', $_GET)) {
@@ -11,6 +11,7 @@ if (array_key_exists('server', $_GET)) {
 if ($hostname) {
     $m = new MinecraftStatus($hostname);
     $status = $m->ping();
+    $f = new MinecraftFormat();
 }
 
 $hostname = htmlspecialchars($hostname);
@@ -40,7 +41,7 @@ if ($hostname) {
     if ($status) {
         echo '<table>
 <tr><th>MOTD</th><th>Server version</th><th>Players</th><th>Ping</th></tr>';
-        echo '<tr><td class="motd">' . MC_parseMotdColors($status['motd']). '</td><td>' .
+        echo '<tr><td class="motd" style="text-align:center;">' . $f->MC_parseMotdColors($status['motd']). '</td><td>' .
             $status['server_version'] . '</td><td>' . $status['player_count'] .
             '/' . $status['player_max'] . '</td><td>' . $status['latency'] . '</td></tr>';
         echo '</table>';
