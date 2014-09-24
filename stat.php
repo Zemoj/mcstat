@@ -8,8 +8,16 @@ if (array_key_exists('server', $_GET)) {
     $hostname = $_GET['server'];
 }
 
-if ($hostname) {
-    $m = new MinecraftStatus($hostname);
+if (array_key_exists('port', $_GET)) {
+    $port = $_GET['port'];
+}
+
+if ($hostname && $port) {
+    $m = new MinecraftStatus($hostname, $port);
+    $status = $m->ping();
+    $f = new MinecraftFormat();
+}elseif($hostname){
+        $m = new MinecraftStatus($hostname);
     $status = $m->ping();
     $f = new MinecraftFormat();
 }
