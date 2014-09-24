@@ -1,11 +1,8 @@
 # mcstat
 
-[![Build Status](https://travis-ci.org/winny-/mcstat.png?branch=master)](https://travis-ci.org/winny-/mcstat)
-
-PHP class, web page, CLI tool, and [Munin][] plugin to get information from a
+PHP class, web page
 [Minecraft][] server.
 
-[Munin]: http://munin-monitoring.org/
 [Minecraft]: http://www.minecraft.net/
 
 ## Protocol Support
@@ -17,38 +14,6 @@ mcstat supports [Server List Ping][] as seen in `1.7` and later, and `1.5.2`. Se
 
 ## Usage
 
-### minecraft_users_ — A Munin plugin
-
-![Screenshot of the minecraft_users_ plugin](https://imgur.com/LxYK5pg.png)
-
-Install minecraft_users_ like any other munin plugin:
-
-    $ make # This create a stand-alone minecraft_users_ script
-    # cp minecraft_users_ /usr/share/munin/plugins/minecraft_users_
-    # chmod 755 /usr/share/munin/plugins/minecraft_users
-    # ln -s /usr/share/munin/plugins/minecraft_users_ \
-        /etc/munin/plugins/minecraft_users_<hostname>:<port>
-    # service munin-node reload
-
-No configuration is necessary because minecraft_users_ is a wildcard plugin.
-
-### mcstat as a Program
-
-`mcstat_program.php` is a script for querying Minecraft servers. You can install a stand-alone version like so:
-
-    $ make
-    $ cp mcstat ~/bin/mcstat
-
-It's very simple and gets the job done:
-
-    $ mcstat uberminecraft.com
-    uberminecraft.com 1.7.4 2714/5000 131ms
-    Uberminecraft Cloud | 22 Games
-    1.7 Play Now!
-
-*Please note:
-[`TERM` must be set to a known terminal](https://github.com/nodesocket/commando/issues/9),
-otherwise php spams stderr unconditionally.*
 
 ### stat.php
 
@@ -79,21 +44,4 @@ well tested!
       float(150)
     }
 
-## Testing
 
-The testing script requires `bash`, [`phpunit`][phpunit], and `java`. The tests
-are ran against against a live server running on localhost.
-
-Run the script as follows:
-
-    make test
-
-By default `testrunner.sh` tests against all server versions `1.4.2` and later.
-Override this like so:
-
-    env Versions='1.7.4 1.7.5' make test
-
-As of commit `979fed97d06a35a96af9195e7750ea1648602154`, `basicQuery`,
-`fullQuery`, and `serverListPing` all pass.
-
-[phpunit]: http://phpunit.de/
