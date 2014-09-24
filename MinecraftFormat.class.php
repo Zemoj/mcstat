@@ -1,19 +1,22 @@
 <?php
 
+class MinecraftFormat
+{
+
 // Multibyte str_split()
-function MC_str_split( $string )
+private function MC_str_split( $string )
 {
     return preg_split('/(?<!^)(?!$)/u', $string );
 }
 
 // http://www.wiki.vg/Chat
-function MC_parseMotdColors($motd)
+public function MC_parseMotdColors($motd)
 {
     $inColorSequence = false;
     $openSpan = false;
     $coloredMotd = '';
 
-    foreach (MC_str_split($motd) as $character) {
+    foreach ($this->MC_str_split($motd) as $character) {
         if ($inColorSequence) {
 
             // find color and insert span
