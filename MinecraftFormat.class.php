@@ -85,8 +85,10 @@ public function MC_parseMotdColors($motd)
             }
 
             $inColorSequence = false;
-        } elseif ($character== '§') {
+        } elseif ($character == "�" || $character == "§" || $character == "&") {
             $inColorSequence = true;
+        } elseif ($character == "\n"){
+            $coloredMotd .= "<br />";
         } else {
             $coloredMotd .= $character;
         }
